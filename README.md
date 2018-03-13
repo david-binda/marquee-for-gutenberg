@@ -1,4 +1,4 @@
-# marquee-for-gutenberg
+# Marquee for Gutenberg
 Example marquee block for WordPress' Gutenberg
 
 ## Description
@@ -14,7 +14,7 @@ Example marquee block for Gutenberg created for learning purposes in terms of a 
 
 ## Screenshots
 
-1. Marquee block in edit mode
+![Marquee block in edit mode](https://github.com/david-binda/marquee-for-gutenberg/blob/master/assets/screenshot-1.png "Marquee block in edit mode")
 
 ## Changelog
 
