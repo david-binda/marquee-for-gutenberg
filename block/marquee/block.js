@@ -17,14 +17,15 @@
 		 * Všechny atributy, které chceme moci měnit, musí být zaregistrované.
 		 */
 		attributes: {
-			content: { // Vlastnost "content" typu řetězec
+			content: { // Vlastnost "content" typu řetězec.
 				type: 'string',
 			},
-			direction: { // Vlastnost "direction" typu řetězec
+			direction: { // Vlastnost "direction" typu řetězec.
 				type: 'string',
+				default: 'left', // Výchozí hodnota.
 			},
 			scrollAmount: {
-				type: 'number',
+				type: 'number', // Číselný typ.
 				default: 6,
 			}
 		},
@@ -86,7 +87,7 @@
 							icon: 'arrow-left', // Ikona tlačítka v panelu nástrojů.
 							title: 'Direction Left', // Popisek.
 							onClick: onChangeDirection( 'left' ), // Akce vykonávající se při kliknutí.
-							isActive: ( 'left' === props.attributes.direction || undefined === props.attributes.direction ) // zda-li je tlačítko aktivní či nikoli.
+							isActive: ( 'left' === props.attributes.direction ) // zda-li je tlačítko aktivní či nikoli.
 						}, {
 							icon: 'arrow-right',
 							title: 'Direction Right',
