@@ -2,7 +2,9 @@
 	var el = wp.element.createElement,
 	registerBlockType = wp.blocks.registerBlockType,
 	PlainText = wp.blocks.PlainText,
-	BlockControls = wp.blocks.BlockControls;
+	BlockControls = wp.blocks.BlockControls,
+	InspectorControls = wp.blocks.InspectorControls,
+	TextControl = wp.components.TextControl;
 
 	registerBlockType( 'david-binda/marquee', { // Název bloku - prefix / jméno.
 
@@ -20,6 +22,10 @@
 			},
 			direction: { // Vlastnost "direction" typu řetězec
 				type: 'string',
+			},
+			scrollAmount: {
+				type: 'number',
+				default: 6,
 			}
 		},
 
@@ -46,6 +52,10 @@
 				};
 			}
 
+			function onChangeLoop( newAmount ) {
+				props.setAttributes( { 'scrollAmount': newAmount } );
+			}
+
 			/*
 			 * Jelikož chceme prvek zobrazit už v editoru, pokud není zrovna upravován,
 			 * tak jako na frontendu, pomůžeme si defaultní vlastností isSelected.
@@ -56,7 +66,8 @@
 					'marquee', // HTML element
 					{
 						className: props.className, // Třída generovaná Gutenbergem.
-						'direction': props.attributes.direction // vlastní attribute direction.
+						'direction': props.attributes.direction, // vlastní attribute direction.
+						'scrollamount': props.attributes.scrollAmount || 6, // vlastní attribute scrollamount.
 					},
 					props.attributes.content || props.attributes.placeholder || "Hello world!" // obsah prvku, placeholder, nebo defaultní placeholder.
 				);
@@ -93,6 +104,20 @@
 							isActive: ( 'down' === props.attributes.direction )
 						} ] }
 					),
+					// Inspektor (zobrazí se v záložce "Blok" v pravém sloupci).
+					el(
+						InspectorControls,
+						{},
+						el(
+							TextControl,
+							{
+								label: 'Scroll speed (defaults to 6):',
+							 	value: props.attributes.scrollAmount,
+								onChange: onChangeLoop,
+								type: 'number',
+							}
+						)
+					),
 					// Dále samotný prvek v editovatelné podobě.
 					el(
 						PlainText, // Textarea.
@@ -123,6 +148,7 @@
 				{
 					className: props.className,
 					'direction': props.attributes.direction,
+					'scrollamount': props.attributes.scrollAmount || 6,
 				},
 				props.attributes.content || props.attributes.placeholder || "Hello world!" // obsah prvku, placeholder, nebo defaultní placeholder.
 			);
